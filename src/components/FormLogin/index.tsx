@@ -6,17 +6,38 @@ export const FormLogin: React.FC = () => {
   //History to control the navigation
   let history = useHistory();
 
-  //Functon active to set the path of navigation
-  function goTo(path: string) {
-    history.push(path);
+  //Handler of input for user
+  function handleUserChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setUser(event.target.value);
   }
+
+  //Handler of input for password
+  function handlePassChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setPass(event.target.value);
+  }
+
+  //Handler of login (check if user exists)
+  function login() {
+    if (user === "teste@liven.com" && pass === "1234") {
+      history.push("/home");
+    } else {
+      alert("Check your credentials");
+    }
+  }
+
+  const [user, setUser] = React.useState("");
+  const [pass, setPass] = React.useState("");
 
   return (
     <S.RightContainer>
       <S.RightTextUp>Welcome!</S.RightTextUp>
-      <S.Input placeholder="User" type="text" />
-      <S.Input placeholder="Password" type="password" />
-      <S.ButtonRight onClick={() => goTo("/home")}>Login</S.ButtonRight>
+      <S.Input placeholder="User" type="text" onChange={handleUserChange} />
+      <S.Input
+        placeholder="Password"
+        type="password"
+        onChange={handlePassChange}
+      />
+      <S.ButtonRight onClick={() => login()}>Login</S.ButtonRight>
     </S.RightContainer>
   );
 };

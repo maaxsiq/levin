@@ -9,6 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Tittle = styled.span`
+  height: 55px;
   font-size: 45px;
   color: white;
   border-bottom: 1px solid #71cd84;
