@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-top: 15px;
   background-color: #08012a;
-  width: 75%;
+  width: 65%;
   height: 95%;
   border-radius: 25px;
   display: flex;
@@ -28,6 +28,9 @@ export const Tittle = styled.span`
   padding: 5px;
   display: flex;
   justify-content: center;
+  position: sticky;
+  top: 0px;
+  background-color: #08012a;
 `;
 
 export const ListItems = styled.div`
