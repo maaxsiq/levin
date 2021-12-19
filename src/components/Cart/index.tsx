@@ -1,52 +1,39 @@
 import React from "react";
 import * as S from "./styles";
 import productImage from "../../assets/product.png";
-import axios from "axios";
 import lessImagem from "../../assets/less.png";
 import plusImagem from "../../assets/plus.png";
 import removeImagem from "../../assets/remove.png";
-
+import { IProduct, useCart } from "../../hooks/cartProvider";
 export const Cart: React.FC = () => {
-  const [products, setProducts] = React.useState([
-    {
-      createAt: "",
-      id: "",
-      image: "",
-      name: "",
-      price: "",
-      stock: 0,
-    },
-  ]);
+  const {
+    products,
+    addProduct,
+    lessProduct,
+    removeProduct,
+    removeAllProducts,
+  } = useCart();
 
-  function handleLessItem (event: React.MouseEvent) {
-    let id = event.currentTarget.getAttribute("id");
-    alert(id);
+  function handleLessItem(_product: IProduct) {
+    lessProduct(_product);
   }
 
-  function handleAddItem (event: React.MouseEvent) {
-    let id = event.currentTarget.getAttribute("id");
-    alert(id);
+  function handleAddItem(_product: IProduct) {
+    addProduct(_product);
   }
 
-  function handleRemoveItem (event: React.MouseEvent) {
-    let id = event.currentTarget.getAttribute("id");
-    alert(id);
+  function handleRemoveItem(_product: IProduct) {
+    removeProduct(_product);
   }
 
-  //Handler of HTTP request GET
-  React.useEffect((): any => {
-    return axios
-      .get("https://5d6da1df777f670014036125.mockapi.io/api/v1/product")
-      .then((res) => res.data)
-      .then((res) => {
-        setProducts(res);
-      });
-  }, []);
+  function handleRemoveAll() {
+    removeAllProducts();
+  }
 
   const ProductItem = products.map((prdct) => {
     return (
-      <S.ListItems key={prdct.id} id={prdct.id}>
-        <S.CardItemQnt>1x</S.CardItemQnt>
+      <S.ListItems key={`${prdct.id} - ${prdct.qnt}`} id={prdct.id}>
+        <S.CardItemQnt>{prdct.qnt}</S.CardItemQnt>
         <S.CardItem>
           <S.ItemLogo src={productImage} />
           <S.InsideCard>
@@ -58,13 +45,22 @@ export const Cart: React.FC = () => {
           </S.InsideCard>
           <S.ButtonsList>
             <S.ButtonInside>
-              <S.ButtonImage src={lessImagem} onClick={handleLessItem}/>
+              <S.ButtonImage
+                src={lessImagem}
+                onClick={() => handleLessItem(prdct)}
+              />
             </S.ButtonInside>
             <S.ButtonInside>
-              <S.ButtonImage src={plusImagem} onClick={handleAddItem}/>
+              <S.ButtonImage
+                src={plusImagem}
+                onClick={() => handleAddItem(prdct)}
+              />
             </S.ButtonInside>
             <S.ButtonInsideX>
-              <S.ButtonImage src={removeImagem} onClick={handleRemoveItem} />
+              <S.ButtonImage
+                src={removeImagem}
+                onClick={() => handleRemoveItem(prdct)}
+              />
             </S.ButtonInsideX>
           </S.ButtonsList>
         </S.CardItem>
@@ -78,8 +74,8 @@ export const Cart: React.FC = () => {
       <S.Footer>
         <S.ProductList>{ProductItem}</S.ProductList>
         <S.ButtonsContainer>
-          <S.ButtonLeft>Clear</S.ButtonLeft>
-          <S.ButtonRight>Finish</S.ButtonRight>
+          <S.ButtonLeft onClick={() => handleRemoveAll()}>Clear</S.ButtonLeft>
+          <S.ButtonRight onClick={() => alert("Successful purchase!")}>Finish</S.ButtonRight>
         </S.ButtonsContainer>
       </S.Footer>
     </S.Container>

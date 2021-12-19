@@ -2,22 +2,16 @@ import React from "react";
 import * as S from "./styles";
 import axios from "axios";
 import productImage from "../../assets/product.png";
+import { IProduct, useCart } from "../../hooks/cartProvider";
 
 export const Products: React.FC = () => {
-  const [products, setProducts] = React.useState([
-    {
-      createAt: "",
-      id: "",
-      image: "",
-      name: "",
-      price: "",
-      stock: 0,
-    },
-  ]);
+  const { addProduct } = useCart();
 
-  function handleAddProduct(event: React.MouseEvent) {
-    let id = event.currentTarget.getAttribute("id");
-    alert(id);
+  const [products, setProducts] = React.useState<IProduct[]>([]);
+
+  function handleAddProduct(_product: IProduct) {
+    if (!_product.qnt) _product.qnt = 1
+    addProduct(_product);
   }
 
   //Handler of HTTP request GET
@@ -35,8 +29,8 @@ export const Products: React.FC = () => {
       <S.ListItems
         key={prdct.id}
         id={prdct.id}
-        onClick={(event: React.MouseEvent<HTMLElement>) => {
-          handleAddProduct(event);
+        onClick={() => {
+          handleAddProduct(prdct);
         }}
       >
         <S.CardItem>
