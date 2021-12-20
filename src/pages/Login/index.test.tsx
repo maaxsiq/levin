@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
-import { Login } from '.';
+import { render, screen } from "@testing-library/react";
+import { Login } from ".";
 
-test('Teste of render login page', () => {
+test("Test of render login page", () => {
   render(<Login />);
+  expect(screen.getByTestId("testContainer")).toBeInTheDocument();
 });

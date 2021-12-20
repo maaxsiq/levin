@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./styles";
 import productImage from "../../assets/product.png";
 import lessImagem from "../../assets/less.png";
@@ -7,6 +7,8 @@ import removeImagem from "../../assets/remove.png";
 import { IProduct, useCart } from "../../hooks/cartProvider";
 
 export const Cart: React.FC = () => {
+
+  //Provider actions
   const {
     products,
     addProduct,
@@ -15,22 +17,27 @@ export const Cart: React.FC = () => {
     removeAllProducts,
   } = useCart();
 
+  //Handle less item
   function handleLessItem(_product: IProduct) {
     lessProduct(_product);
   }
 
+  //Handle add item
   function handleAddItem(_product: IProduct) {
     addProduct(_product);
   }
 
+  //Handle remove an item
   function handleRemoveItem(_product: IProduct) {
     removeProduct(_product);
   }
 
+  //Handle remove all items
   function handleRemoveAll() {
     removeAllProducts();
   }
 
+  //Component of providers products
   const ProductItem = products.map((prdct) => {
     return (
       <S.ListItems key={`${prdct.id} - ${prdct.qnt}`} id={prdct.id}>
@@ -48,18 +55,21 @@ export const Cart: React.FC = () => {
             <S.ButtonInside>
               <S.ButtonImage
                 src={lessImagem}
+                data-testid={'less-' + prdct.id}
                 onClick={() => handleLessItem(prdct)}
               />
             </S.ButtonInside>
             <S.ButtonInside>
               <S.ButtonImage
                 src={plusImagem}
+                data-testid={'add-' + prdct.id}
                 onClick={() => handleAddItem(prdct)}
               />
             </S.ButtonInside>
             <S.ButtonInsideX>
               <S.ButtonImage
                 src={removeImagem}
+                data-testid={'removeItem-' + prdct.id}
                 onClick={() => handleRemoveItem(prdct)}
               />
             </S.ButtonInsideX>
@@ -70,12 +80,12 @@ export const Cart: React.FC = () => {
   });
 
   return (
-    <S.Container>
+    <S.Container data-testid="testCart">
       <S.Tittle>Cart</S.Tittle>
       <S.Footer>
         <S.ProductList>{ProductItem}</S.ProductList>
         <S.ButtonsContainer>
-          <S.ButtonLeft onClick={() => handleRemoveAll()}>Clear</S.ButtonLeft>
+          <S.ButtonLeft data-testid='removeAll' onClick={() => handleRemoveAll()}>Clear</S.ButtonLeft>
           <S.ButtonRight onClick={() => alert("Successful purchase!")}>Finish</S.ButtonRight>
         </S.ButtonsContainer>
       </S.Footer>

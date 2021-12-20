@@ -1,11 +1,12 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Home } from '.';
 import { CartProvider } from '../../hooks/cartProvider';
 
-test('Teste of render home page', () => {
+test('Test of render home page', () => {
   render(
     <CartProvider>
       <Home/>
     </CartProvider>
   );
+  expect(screen.getByTestId("testContainer")).toBeInTheDocument();
 });

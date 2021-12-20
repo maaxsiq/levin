@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { Welcome } from '.';
 
-test('Teste of render welcome component', () => {
+test('Test of render welcome component', () => {
   render(
       <Welcome/>
   );
 });
 
-test('Teste of the welcome subtitle text', () => {
+test('Test of the welcome subtitle text', () => {
   render(
       <Welcome/>
   );
@@ -15,7 +15,7 @@ test('Teste of the welcome subtitle text', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('Teste of the welcome button', () => {
+test('Test of the welcome button', () => {
   render(
       <Welcome/>
   );

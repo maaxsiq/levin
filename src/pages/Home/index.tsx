@@ -6,7 +6,7 @@ import * as S from "./styles";
 
 export const Home: React.FC = () => {
   return (
-    <S.Container>
+    <S.Container data-testid="testContainer">
       <Header />
       <S.InsideContainer>
         <Products />

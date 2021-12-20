@@ -18,7 +18,7 @@ export const FormLogin: React.FC = () => {
 
   //Handler of login (check if user exists)
   function login() {
-    if (user === "teste@liven.com" && pass === "1234") {
+    if (user === "test@liven.com" && pass === "1234") {
       history.push("/home");
     } else {
       alert("Check your credentials");
@@ -29,12 +29,13 @@ export const FormLogin: React.FC = () => {
   const [pass, setPass] = React.useState("");
 
   return (
-    <S.RightContainer>
+    <S.RightContainer data-testid="testLogin">
       <S.RightTextUp>Welcome!</S.RightTextUp>
-      <S.Input placeholder="User" type="text" onChange={handleUserChange} />
+      <S.Input placeholder="User" type="text" title="userId" onChange={handleUserChange} />
       <S.Input
         placeholder="Password"
         type="password"
+        title="passId"
         onChange={handlePassChange}
       />
       <S.ButtonRight onClick={() => login()}>Login</S.ButtonRight>

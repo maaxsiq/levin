@@ -5,7 +5,7 @@ import { Welcome } from "../../components/Welcome";
 
 export const Login: React.FC = () => {
   return (
-    <S.Container>
+    <S.Container data-testid="testContainer">
       <S.CenterContainer>
         <Welcome/>
         <S.CenterLine />

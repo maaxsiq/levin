@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 
+//Interface for actions context
 export interface ICartContext {
   products: IProduct[];
   addProduct: (product: IProduct) => void;
@@ -8,6 +9,7 @@ export interface ICartContext {
   removeAllProducts: () => void;
 }
 
+//Interface for object
 export interface IProduct {
   createAt: string;
   id: string;
@@ -18,15 +20,21 @@ export interface IProduct {
   qnt: number;
 }
 
+//Interface for object props
 export interface ICartProps {
   children: React.ReactNode;
 }
 
+//Setting the context actions
 const CartContext = createContext<ICartContext | undefined>(undefined);
 
+//Handle full provider
 export const CartProvider = (props: ICartProps) => {
+
+  //Define the type and state of object provider
   const [products, setProducts] = useState<IProduct[]>([]);
 
+  //Handle for add product on provider
   const addProduct = useCallback(
     (product: IProduct) => {
       let res = products.map((_product) => {
@@ -44,6 +52,7 @@ export const CartProvider = (props: ICartProps) => {
     [setProducts, products]
   );
   
+  //Handle for remove completely product an provider
   const removeProduct = useCallback(
     (product) => {
       let notHas = products.filter((_product) => _product.id !== product.id);
@@ -52,6 +61,7 @@ export const CartProvider = (props: ICartProps) => {
     [setProducts, products]
   );
 
+  //Handle for remove an product of provider
   const lessProduct = useCallback(
     (product: IProduct) => {
       let continued: boolean | void = true;
@@ -66,10 +76,12 @@ export const CartProvider = (props: ICartProps) => {
     [setProducts, products, removeProduct]
   );
 
+  //Handle for clear the list of products provider
   const removeAllProducts = useCallback(() => {
     setProducts([]);
   }, [setProducts]);
 
+  //Setting the export values of provider
   const provider = {
     products,
     addProduct,
@@ -77,6 +89,8 @@ export const CartProvider = (props: ICartProps) => {
     removeProduct,
     removeAllProducts,
   } as ICartContext;
+
+  //Return the context
   return (
     <CartContext.Provider value={provider}>
       {props.children}
@@ -84,6 +98,7 @@ export const CartProvider = (props: ICartProps) => {
   );
 };
 
+//Handle the throw chance and check the context use
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

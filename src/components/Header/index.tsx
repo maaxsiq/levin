@@ -15,9 +15,9 @@ export const Header: React.FC = () => {
   
   return (
     <S.Container>
-      <S.Image src={image} />
+      <S.Image src={image} data-testid="imgLogo" />
       <S.Tittle>Market</S.Tittle>
-      <S.Logout src={logout} onClick={() => goTo("/")} />
+      <S.Logout src={logout} data-testid="imgLogout" onClick={() => goTo("/")} />
     </S.Container>
   );
 };
