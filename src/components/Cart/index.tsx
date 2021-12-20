@@ -5,6 +5,7 @@ import lessImagem from "../../assets/less.png";
 import plusImagem from "../../assets/plus.png";
 import removeImagem from "../../assets/remove.png";
 import { IProduct, useCart } from "../../hooks/cartProvider";
+
 export const Cart: React.FC = () => {
   const {
     products,

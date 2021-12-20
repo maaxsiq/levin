@@ -10,7 +10,7 @@ export const Products: React.FC = () => {
   const [products, setProducts] = React.useState<IProduct[]>([]);
 
   function handleAddProduct(_product: IProduct) {
-    if (!_product.qnt) _product.qnt = 1
+    if (!_product.qnt) _product.qnt = 1;
     addProduct(_product);
   }
 
