@@ -1,6 +1,6 @@
 # The project was created for Liven
 
-User: teste@liven.com
+User: test@liven.com
 Password: 1234
 
 # Getting Started with Create React App
